@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QLabel>
 #include <QPixmap>
+#include "mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -18,12 +19,12 @@ public:
     ~Dialog();
 
 private slots:
-    //void on_startup(void);
-
     void on_acceptLoginPushButton_clicked();
+
+    void on_cancelLoginPushButton_clicked();
 
 private:
     Ui::Dialog *ui;
-
+    MainWindow *mainWin;
 };
 #endif // DIALOG_H

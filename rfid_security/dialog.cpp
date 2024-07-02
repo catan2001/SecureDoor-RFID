@@ -1,11 +1,19 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include "QDebug"
+
+using namespace std;
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+
+    ui->personLabel->setStyleSheet("QLabel"
+                              "{background: url(../person2.png);"
+                              "background-repeat: no-repeat;"
+                              "background-position: center;}");
 
     ui->cancelLoginPushButton->setStyleSheet("QPushButton "
                                              "{border : 2px solid #111111;"
@@ -37,17 +45,6 @@ Dialog::Dialog(QWidget *parent)
                                    "color : #A9A9A9;"
                                    "min-width : 10em;}");
 
-    //ui->cancelLoginPushButton->fontMetrics()
-
-    //login_label = new Qlabel(this);
-
-    /*ui->frame->setStyleSheet("QFrame {border: 2px solid #3f3f3f; "
-                             "background-color : #3f3f3f; "
-                             "color : blue; "
-                             "padding: 2px }");
-    ui->frame->setAutoFillBackground(true);
-    ui->frame->adjustSize("200x200"); */
-
 }
 
 Dialog::~Dialog()
@@ -58,6 +55,31 @@ Dialog::~Dialog()
 
 void Dialog::on_acceptLoginPushButton_clicked()
 {
-    // TODO: implement when correct password
+    const QString login_password = ui->passwordLineEdit->text();
+    const QString password = "admin";
+    if(login_password == password) {
+        ui->passwordLineEdit->clear();
+        qDebug() << "success\n";
+        this->hide();
+        mainWin = new MainWindow(this);
+        mainWin->showMaximized();
+        mainWin->setStyleSheet("MainWindow "
+                               "{border: 2px solid #111111; "
+                               "background-color : #222222; "
+                               "padding: 2px }");
+
+    }
+    else
+        qDebug() << "fail!\n";
+}
+
+
+
+
+void Dialog::on_cancelLoginPushButton_clicked()
+{
+    ui->passwordLineEdit->clear();
+    //this->destroy();
+    //exit(EXIT_SUCCESS);
 }
 
