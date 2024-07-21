@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->listWidget->setStyleSheet("QListWidget"
+                                  "{background-color : #111111;"
+                                  "color: #eeeeee;}");
 }
 
 MainWindow::~MainWindow()

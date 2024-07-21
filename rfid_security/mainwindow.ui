@@ -13,7 +13,66 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QFormLayout" name="formLayout">
+    <item row="1" column="0">
+     <widget class="QListWidget" name="listWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>530</height>
+       </size>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="resizeMode">
+       <enum>QListView::Adjust</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Clients</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Add New</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Settings</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -23,15 +82,43 @@
      <height>23</height>
     </rect>
    </property>
+   <property name="defaultUp">
+    <bool>true</bool>
+   </property>
    <property name="nativeMenuBar">
     <bool>true</bool>
    </property>
+   <widget class="QMenu" name="menuClients">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Clients</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <addaction name="menuClients"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="sizeGripEnabled">
     <bool>true</bool>
    </property>
   </widget>
+  <action name="actionClients">
+   <property name="text">
+    <string>Clients</string>
+   </property>
+  </action>
+  <action name="actionClients_2">
+   <property name="text">
+    <string>Clients</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
