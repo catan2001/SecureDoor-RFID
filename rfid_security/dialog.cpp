@@ -1,6 +1,7 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 #include "QDebug"
+#include "authenticate.h"
 
 using namespace std;
 
@@ -57,7 +58,9 @@ void Dialog::on_acceptLoginPushButton_clicked()
 {
     const QString login_password = ui->passwordLineEdit->text();
     const QString password = "admin";
-    if(login_password == password) {
+    //char login_password_str[] = login_password.toStdString();
+    qDebug() << login_password << "\n";
+    if(authenticate(login_password.toStdString().data()) == SUCCESS_PASS) {
         ui->passwordLineEdit->clear();
         qDebug() << "success\n";
         this->hide();
