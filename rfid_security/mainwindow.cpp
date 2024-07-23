@@ -7,8 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->listWidget->setStyleSheet("QListWidget"
-                                  "{background-color : #111111;"
-                                  "color: #eeeeee;}");
+                                  "{background-color : #1a1a1a;" // darker gray-black
+                                  "color: #eeeeee;}"); // white
+    ui->statusbar->setStyleSheet("QStatusBar"
+                                 "{color: #eeeeee}"); // white
+    ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
+    ui->stackedWidget->setCurrentWidget(ui->page_AddNew);
 }
 
 MainWindow::~MainWindow()
@@ -18,3 +22,18 @@ MainWindow::~MainWindow()
 void startUp() {
 
 }
+
+
+
+void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    if(item == ui->listWidget->item(0)) // TODO: define for each list
+        ui->stackedWidget->setCurrentWidget(ui->page_AddNew);
+    if(item == ui->listWidget->item(1))
+        ui->stackedWidget->setCurrentWidget(ui->page_Clients);
+    if(item == ui->listWidget->item(2))
+        ui->stackedWidget->setCurrentWidget(ui->page_Monitor);
+    if(item == ui->listWidget->item(3))
+        ui->stackedWidget->setCurrentWidget(ui->page_Settings);
+}
+

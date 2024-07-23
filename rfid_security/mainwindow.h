@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedWidget>
+#include <QListWidget>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,6 +19,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void startUp();
+
+private slots:
+
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

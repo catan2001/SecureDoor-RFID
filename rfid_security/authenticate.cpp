@@ -4,7 +4,7 @@
 int authenticate(char *input) {
     FILE *fp;
     FILE *fd;
-    char salt[] = "89ZhK$#!__)9mjjjk"; // CHANGE FOR SECURITY REASONS!
+    const char salt[] = "89ZhK$#!__)9mjjjk"; // CHANGE FOR SECURITY REASONS!
     unsigned int passSha[8];
     char default_pass[] = "admin";
     unsigned int default_sha[8];

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>789</width>
-    <height>578</height>
+    <width>855</width>
+    <height>631</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QFormLayout" name="formLayout">
-    <item row="1" column="0">
+    <item row="0" column="0">
      <widget class="QListWidget" name="listWidget">
       <property name="enabled">
        <bool>true</bool>
@@ -38,6 +38,12 @@
       <property name="dragEnabled">
        <bool>true</bool>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>10</width>
+        <height>10</height>
+       </size>
+      </property>
       <property name="resizeMode">
        <enum>QListView::Adjust</enum>
       </property>
@@ -46,12 +52,17 @@
       </property>
       <item>
        <property name="text">
+        <string>Add New</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>Clients</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Add New</string>
+        <string>Monitor</string>
        </property>
       </item>
       <item>
@@ -61,14 +72,305 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+    <item row="0" column="1">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
       </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="page_AddNew">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>230</y>
+          <width>87</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>ReadTag</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>60</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enter Name</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>110</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Last Name</string>
+        </property>
+       </widget>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>230</y>
+          <width>118</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="value">
+         <number>24</number>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>60</y>
+          <width>171</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>160</y>
+          <width>81</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>RFID TAG:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>160</y>
+          <width>181</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PutRFIDTag</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>110</y>
+          <width>171</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_Clients">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>1</x>
+          <y>1</y>
+          <width>681</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <row>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Last Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>TAG</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_Settings">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>101</x>
+          <y>41</y>
+          <width>371</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Current Password:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Change Password:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>150</y>
+          <width>351</width>
+          <height>131</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Enter Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Enter New Password:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLineEdit" name="lineEdit">
+               <property name="inputMethodHints">
+                <set>Qt::ImhHiddenText|Qt::ImhSensitiveData</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_2">
+               <property name="inputMethodHints">
+                <set>Qt::ImhSensitiveData</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Save</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_Monitor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -78,31 +380,56 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>789</width>
+     <width>855</width>
      <height>23</height>
     </rect>
    </property>
    <property name="defaultUp">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="nativeMenuBar">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
-   <widget class="QMenu" name="menuClients">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="title">
-     <string>Clients</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionContents"/>
+    <addaction name="separator"/>
+    <addaction name="actionTechnical_Support"/>
+    <addaction name="actionContents_2"/>
    </widget>
-   <addaction name="menuClients"/>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAnalyze">
+    <property name="title">
+     <string>Analyze</string>
+    </property>
+    <addaction name="actionPerform_Data_Analyzation"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionAdd_New_Client"/>
+    <addaction name="actionMonitor"/>
+    <addaction name="actionFind_Client"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+    <addaction name="actionFull_Screen"/>
+    <addaction name="actionMinimize"/>
+   </widget>
+   <addaction name="menuView"/>
+   <addaction name="menuAnalyze"/>
+   <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuWindow"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="sizeGripEnabled">
@@ -117,6 +444,56 @@
   <action name="actionClients_2">
    <property name="text">
     <string>Clients</string>
+   </property>
+  </action>
+  <action name="actionsdf">
+   <property name="text">
+    <string>sdf</string>
+   </property>
+  </action>
+  <action name="actionPerform_Data_Analyzation">
+   <property name="text">
+    <string>Analyze Data</string>
+   </property>
+  </action>
+  <action name="actionContents">
+   <property name="text">
+    <string>Contents</string>
+   </property>
+  </action>
+  <action name="actionTechnical_Support">
+   <property name="text">
+    <string>Technical Support</string>
+   </property>
+  </action>
+  <action name="actionContents_2">
+   <property name="text">
+    <string>Report Bug</string>
+   </property>
+  </action>
+  <action name="actionFull_Screen">
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+  </action>
+  <action name="actionMinimize">
+   <property name="text">
+    <string>Minimize</string>
+   </property>
+  </action>
+  <action name="actionFind_Client">
+   <property name="text">
+    <string>Find Client</string>
+   </property>
+  </action>
+  <action name="actionMonitor">
+   <property name="text">
+    <string>Monitor</string>
+   </property>
+  </action>
+  <action name="actionAdd_New_Client">
+   <property name="text">
+    <string>Add New Client</string>
    </property>
   </action>
  </widget>
