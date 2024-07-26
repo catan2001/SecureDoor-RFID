@@ -28,6 +28,5 @@ int main(int argc, char *argv[])
 //    //mainWin.startUp();
 //    mainWin.hide();
 
-
     return a.exec();
 }
