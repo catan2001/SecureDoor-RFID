@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
                                  "{color: #eeeeee}"); // white
     ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
     ui->stackedWidget->setCurrentWidget(ui->page_AddNew);
+
+    ui->tableWidget->insertRow(2);
+    ui->tableWidget->setRowCount(10);
 }
 
 MainWindow::~MainWindow()
