@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    add_new_dialog.cpp \
     authenticate.cpp \
     main.cpp \
     dialog.cpp \
@@ -16,12 +17,14 @@ SOURCES += \
     sha256.cpp
 
 HEADERS += \
+    add_new_dialog.h \
     authenticate.h \
     dialog.h \
     mainwindow.h \
     sha256.h
 
 FORMS += \
+    add_new_dialog.ui \
     dialog.ui \
     mainwindow.ui
 

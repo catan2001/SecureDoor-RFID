@@ -40,3 +40,15 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         ui->stackedWidget->setCurrentWidget(ui->page_Settings);
 }
 
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    NewClientDialog = new Add_New_Dialog(this);
+    NewClientDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                   "background: no;"
+                                   "background-color : #222222; "
+                                   "padding: 2px }");
+    NewClientDialog->show();
+    //NewClientDialog->destroy(true, false);
+}
+

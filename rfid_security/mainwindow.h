@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QListWidget>
+#include "add_new_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,11 +22,12 @@ public:
     void startUp();
 
 private slots:
-
     void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;
+    Add_New_Dialog *NewClientDialog;
 };
 
 #endif // MAINWINDOW_H
