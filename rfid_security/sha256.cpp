@@ -38,7 +38,7 @@ int sha_256(char *str, unsigned int *output_string){
     //for(unsigned int i = 0; i < bit_len; ++i)
     unsigned char *padded_msg = (unsigned char *)malloc(64 * sizeof(unsigned char));
 
-    unsigned char max_len = 64; // equates to 512bits
+    //unsigned char max_len = 64; // equates to 512bits
     unsigned int M[16]; // 16x32 bits = 512bits
     unsigned int W[64]; // 64 words of 32bits each
 

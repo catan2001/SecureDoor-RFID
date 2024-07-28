@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QDebug"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,33 +12,48 @@ MainWindow::MainWindow(QWidget *parent) :
                                   "color: #eeeeee;}"); // white
     ui->statusbar->setStyleSheet("QStatusBar"
                                  "{color: #eeeeee}"); // white
-    ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
-    ui->stackedWidget->setCurrentWidget(ui->page_AddNew);
 
-    ui->tableWidget->insertRow(2);
-    ui->tableWidget->setRowCount(10);
+    ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
+    ui->stackedWidget->setCurrentWidget(ui->page_Clients);
+    ui->tableWidget->setRowCount(1);
+    //ui->tableWidget->insertRow(1);
+
+    //ui->tableWidget->setCurrentCell(1,0);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void startUp() {
 
 }
 
+void MainWindow::dataUse(NewClientStruct &structure) {
+    qDebug() << structure.firstName << "\n";
+    qDebug() << structure.lastName << "\n";
+    qDebug() << structure.emailAddress << "\n";
+    qDebug() << structure.RFIDTag << "\n";
+    qDebug() << structure.imagePath << "\n";
+    qDebug() << "Connected!\n";
 
+    auto model = ui->tableWidget->model();
+    model->setData(model->index(ui->tableWidget->rowCount()-1, 0), structure.firstName);
+    model->setData(model->index(ui->tableWidget->rowCount()-1, 1), structure.lastName);
+    model->setData(model->index(ui->tableWidget->rowCount()-1, 2), structure.emailAddress);
+    model->setData(model->index(ui->tableWidget->rowCount()-1, 3), structure.RFIDTag);
+    model->setData(model->index(ui->tableWidget->rowCount()-1, 4), structure.imagePath);
+    ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+
+}
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    if(item == ui->listWidget->item(0)) // TODO: define for each list
-        ui->stackedWidget->setCurrentWidget(ui->page_AddNew);
-    if(item == ui->listWidget->item(1))
+    if(item == ui->listWidget->item(0))
         ui->stackedWidget->setCurrentWidget(ui->page_Clients);
-    if(item == ui->listWidget->item(2))
+    if(item == ui->listWidget->item(1))
         ui->stackedWidget->setCurrentWidget(ui->page_Monitor);
-    if(item == ui->listWidget->item(3))
-        ui->stackedWidget->setCurrentWidget(ui->page_Settings);
 }
 
 
@@ -49,6 +65,8 @@ void MainWindow::on_pushButton_4_clicked()
                                    "background-color : #222222; "
                                    "padding: 2px }");
     NewClientDialog->show();
-    //NewClientDialog->destroy(true, false);
+    // connect NewClientDialog with MainWindow to get data
+    QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
+                     this, SLOT(dataUse(NewClientStruct &)));
 }
 
