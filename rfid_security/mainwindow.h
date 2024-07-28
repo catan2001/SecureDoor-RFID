@@ -23,8 +23,12 @@ public:
 
 private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
-    void on_pushButton_4_clicked();
+    //void on_pushButtonAdd_clicked();
     void dataUse(NewClientStruct &structure);
+
+    void on_listWidgetOptions1_itemClicked(QListWidgetItem *item);
+
+    void on_pushButtonLoad_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>735</width>
+    <width>904</width>
     <height>596</height>
    </rect>
   </property>
@@ -15,6 +15,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <property name="spacing">
+     <number>3</number>
+    </property>
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
+    <property name="bottomMargin">
+     <number>9</number>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,0">
       <item>
@@ -31,37 +43,85 @@
         <property name="minimumSize">
          <size>
           <width>85</width>
-          <height>350</height>
+          <height>250</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
+          <width>85</width>
           <height>16777215</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>10</pointsize>
          </font>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
         </property>
         <property name="sizeAdjustPolicy">
          <enum>QAbstractScrollArea::AdjustToContents</enum>
         </property>
-        <property name="dragEnabled">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
          <bool>true</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::IgnoreAction</enum>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
         </property>
         <property name="iconSize">
          <size>
-          <width>10</width>
-          <height>10</height>
+          <width>50</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="textElideMode">
+         <enum>Qt::ElideMiddle</enum>
+        </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>true</bool>
+        </property>
         <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
+         <enum>QListView::Fixed</enum>
         </property>
         <property name="spacing">
-         <number>5</number>
+         <number>14</number>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::IconMode</enum>
+        </property>
+        <property name="uniformItemSizes">
+         <bool>false</bool>
+        </property>
+        <property name="batchSize">
+         <number>100</number>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="selectionRectVisible">
+         <bool>false</bool>
+        </property>
+        <property name="currentRow">
+         <number>-1</number>
         </property>
         <property name="sortingEnabled">
          <bool>true</bool>
@@ -81,72 +141,78 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
-         <widget class="QToolButton" name="toolButton">
+         <widget class="QListWidget" name="listWidgetSideBar2">
           <property name="minimumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>85</width>
+            <height>260</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>85</width>
+            <height>400</height>
            </size>
           </property>
-          <property name="text">
-           <string>...</string>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
           </property>
-          <property name="icon">
-           <iconset theme="list-add">
-            <normaloff>.</normaloff>.</iconset>
+          <property name="autoScrollMargin">
+           <number>16</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="toolButton_2">
-          <property name="minimumSize">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::NoDragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::IgnoreAction</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <property name="iconSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>45</width>
+            <height>45</height>
            </size>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>50</height>
-           </size>
+          <property name="textElideMode">
+           <enum>Qt::ElideLeft</enum>
           </property>
-          <property name="text">
-           <string>...</string>
+          <property name="movement">
+           <enum>QListView::Static</enum>
           </property>
-          <property name="icon">
-           <iconset theme="edit-find">
-            <normaloff>.</normaloff>.</iconset>
+          <property name="spacing">
+           <number>16</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="toolButton_3">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>50</height>
-           </size>
+          <property name="viewMode">
+           <enum>QListView::IconMode</enum>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>50</height>
-           </size>
+          <property name="modelColumn">
+           <number>0</number>
           </property>
-          <property name="text">
-           <string>...</string>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
-          <property name="icon">
-           <iconset theme="applications-system">
-            <normaloff>.</normaloff>.</iconset>
-          </property>
+          <item>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Search</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Settings</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -177,7 +243,7 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1,0,0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QTableWidget" name="tableWidget">
           <property name="minimumSize">
@@ -214,12 +280,15 @@
            <bool>false</bool>
           </property>
           <property name="alternatingRowColors">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="gridStyle">
            <enum>Qt::SolidLine</enum>
           </property>
           <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
            <bool>true</bool>
           </property>
           <property name="rowCount">
@@ -236,6 +305,9 @@
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderShowSortIndicator" stdset="0">
            <bool>true</bool>
@@ -268,120 +340,179 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
+          <property name="spacing">
+           <number>12</number>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_10">
-          <item>
-           <widget class="QListWidget" name="listWidget_2">
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="labelSettings">
             <property name="minimumSize">
              <size>
-              <width>200</width>
+              <width>80</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>300</width>
+              <width>80</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Options</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_9">
+           <widget class="QListWidget" name="listWidgetOptions1">
+            <property name="minimumSize">
+             <size>
+              <width>105</width>
+              <height>400</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>400</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::SelectedClicked</set>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::NoDragDrop</enum>
+            </property>
+            <property name="defaultDropAction">
+             <enum>Qt::IgnoreAction</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="textElideMode">
+             <enum>Qt::ElideNone</enum>
+            </property>
+            <property name="movement">
+             <enum>QListView::Static</enum>
+            </property>
+            <property name="resizeMode">
+             <enum>QListView::Adjust</enum>
+            </property>
+            <property name="layoutMode">
+             <enum>QListView::SinglePass</enum>
+            </property>
             <property name="spacing">
-             <number>15</number>
+             <number>20</number>
+            </property>
+            <property name="viewMode">
+             <enum>QListView::IconMode</enum>
+            </property>
+            <property name="uniformItemSizes">
+             <bool>true</bool>
+            </property>
+            <property name="batchSize">
+             <number>150</number>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="selectionRectVisible">
+             <bool>true</bool>
+            </property>
+            <property name="itemAlignment">
+             <set>Qt::AlignLeading</set>
             </property>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <item>
-               <widget class="QPushButton" name="pushButton_4">
-                <property name="minimumSize">
-                 <size>
-                  <width>125</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Add Client</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_3">
-                <property name="minimumSize">
-                 <size>
-                  <width>125</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Remove Client</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <property name="text">
+              <string>Add</string>
+             </property>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QPushButton" name="pushButton_5">
-                <property name="minimumSize">
-                 <size>
-                  <width>125</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Save Data</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_7">
-                <property name="minimumSize">
-                 <size>
-                  <width>125</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Load Data</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <property name="text">
+              <string>Remove</string>
+             </property>
             </item>
-           </layout>
+            <item>
+             <property name="text">
+              <string>ReScanTag</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>HideShow</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="pushButtonSaveData">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Save Data</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="pushButtonLoad">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Load Data</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -519,21 +650,26 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Entry Log</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listWidget_3"/>
-          </item>
-         </layout>
+         <layout class="QVBoxLayout" name="verticalLayout_8"/>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QListWidget" name="listWidgetHistory">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>16777215</height>
+       </size>
+      </property>
      </widget>
     </item>
    </layout>
@@ -543,7 +679,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>735</width>
+     <width>904</width>
      <height>23</height>
     </rect>
    </property>

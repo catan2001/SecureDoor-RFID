@@ -136,7 +136,6 @@ void Add_New_Dialog::on_LineEdit_Path_textEdited(const QString &arg1)
     }
 }
 
-
 void Add_New_Dialog::on_PushButton_ScanTag_clicked()
 {
     //todo: implement scan function here
@@ -147,13 +146,11 @@ void Add_New_Dialog::on_PushButton_ScanTag_clicked()
     ui->ProgressBarTag->setValue(100);
 }
 
-
 void Add_New_Dialog::on_PushButton_Cancel_clicked()
 {
     //TODO implement pop-up {yes/no}
     QWidget::close();
 }
-
 
 void Add_New_Dialog::on_ToolButtonInfoNewClient_clicked()
 {
@@ -161,8 +158,6 @@ void Add_New_Dialog::on_ToolButtonInfoNewClient_clicked()
     msgBox.setText("Please Save an Image into Programs Folder");
     msgBox.exec();
 }
-
-
 
 void Add_New_Dialog::on_PushButton_Save_clicked()
 {
