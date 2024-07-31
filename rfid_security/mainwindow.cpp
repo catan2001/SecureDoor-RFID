@@ -47,9 +47,11 @@ MainWindow::MainWindow(QWidget *parent) :
                                   "QListWidget::item"
                                   "{background-color: transparent;"
                                   "color: #C0C0C0;}"
+                                  //"border: 2px solid #C0C0C0;}"
+
 
                                   "QListWidget::item:hover"
-                                  "{background-color: #152238;"
+                                  "{background-color: #4863A0;" //4863A0
                                   "color: #C0C0C0;}"
 
                                   "QListWidget::item:selected"
@@ -127,6 +129,19 @@ MainWindow::MainWindow(QWidget *parent) :
                                    "background-color: #4969ff;}");
 
     ui->labelSettings->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelEmail->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelReadEmail->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelName->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelReadName->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelLastName->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelReadLastName->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelRFID->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelReadRFID->setStyleSheet("QLabel{color: #eeeeee;}");
+
+    ui->LabelReadImage->setStyleSheet("QLabel{"
+                                      "border : 2px solid #111111;"
+                                      "padding: 6px;"
+                                      "}");
 
     ui->pushButtonLoad->setStyleSheet("QPushButton"
                                      "{border : 2px solid #111111;"
@@ -203,8 +218,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
     ui->stackedWidget->setCurrentWidget(ui->page_Clients);
-    ui->listWidget->setCurrentRow(0);
-    ui->tableWidget->setRowCount(1);
+    //ui->listWidget->setCurrentRow(0);
+    //ui->tableWidget->setRowCount(1);
+
+    char path[] = "../config/dataBase.xml";
+    readXmlData(path);
 }
 
 MainWindow::~MainWindow()
@@ -225,6 +243,8 @@ void MainWindow::dataUse(NewClientStruct &structure) {
     qDebug() << "Connected!\n";
 
     auto model = ui->tableWidget->model();
+
+    if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
 
     model->setData(model->index(ui->tableWidget->rowCount()-1, 0), structure.firstName);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 1), structure.lastName);
@@ -256,15 +276,67 @@ void MainWindow::on_listWidgetOptions1_itemClicked(QListWidgetItem *item)
         QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
                          this, SLOT(dataUse(NewClientStruct &)));
     }
-    if(item == ui->listWidgetOptions1->item(1)) {}
-        // REMOVE ROW FROM TABLE
-    if(item == ui->listWidgetOptions1->item(2)) {}
-        //TODO: SCAN RFID
-}
 
+    // REMOVE ROW FROM TABLE
+    if(item == ui->listWidgetOptions1->item(1)) {
+        if(ui->tableWidget->currentRow()>=0) {
+            ui->tableWidget->removeRow(ui->tableWidget->currentRow());
+        }
+    }
+
+    //TODO: SCAN RFID
+    if(item == ui->listWidgetOptions1->item(2)) {
+        //just for debug purpose;
+        auto model = ui->tableWidget->model();
+        model->setData(model->index(ui->tableWidget->currentRow(), 3), "12847987094658723450823576213908");
+    }
+
+    // hides listWidgetHistory
+    if(item == ui->listWidgetOptions1->item(3)) {
+        if(if_hidden == NOT_HIDDEN) {
+            ui->listWidgetHistory->hide();
+            if_hidden = HIDDEN;
+        }
+        else {
+            ui->listWidgetHistory->show();
+            if_hidden = NOT_HIDDEN;
+        }
+    }
+}
 
 void MainWindow::on_pushButtonLoad_clicked()
 {
     QString DBdataPath = QFileDialog::getOpenFileName(this, "Open DataBase", "../");
+}
+
+void MainWindow::on_pushButtonDbgHistory_clicked()
+{
+    ui->listWidgetHistory->insertItem(0, "Bla konj bla");
+    ui->listWidgetHistory->insertItem(0, "kramk");
+}
+
+// very simple function for reading data
+// TODO: if enough time make lexer for XML file.
+void MainWindow::readXmlData(char *path){
+    FILE *fp;
+    fp = fopen(path, "r");
+    if(fp == NULL) return; // todo: ADD ERROR BOX JUMPS
+    char firstName[50];
+    char lastName[50];
+    char emailAddress[70];
+    char RFIDTag[70];
+    char imagePath[100];
+    while(fscanf(fp, "<user><name> %s </name><lastname> %s </lastname><email> %s </email><rfid> %s </rfid><imgpath> %s </imgpath></user>\n", firstName, lastName, emailAddress, RFIDTag, imagePath) == 5)
+    {
+        auto model = ui->tableWidget->model();
+        if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+
+        model->setData(model->index(ui->tableWidget->rowCount()-1, 0), firstName);
+        model->setData(model->index(ui->tableWidget->rowCount()-1, 1), lastName);
+        model->setData(model->index(ui->tableWidget->rowCount()-1, 2), emailAddress);
+        model->setData(model->index(ui->tableWidget->rowCount()-1, 3), RFIDTag);
+        model->setData(model->index(ui->tableWidget->rowCount()-1, 4), imagePath);
+        ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+    }
 }
 

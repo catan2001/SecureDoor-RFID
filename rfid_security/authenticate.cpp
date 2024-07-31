@@ -17,9 +17,9 @@ int authenticate(char *input) {
         input_pass[i] = input_pass[i]/2 + salt[i%salt_len]; //salting
     }
 
-    fp = fopen("../config", "r");
+    fp = fopen("../config/config", "r");
     if(fp == NULL) {
-        fp = fopen("../config", "w"); // if the file does not exist, create it and write password: admin
+        fp = fopen("../config/config", "w"); // if the file does not exist, create it and write password: admin
         if(fp == NULL) {
             free(input_pass);
             return ERROR_FILE;
@@ -36,7 +36,7 @@ int authenticate(char *input) {
         fclose(fp);
     }
 
-    fd = fopen("../config", "r");
+    fd = fopen("../config/config", "r");
     if(fd == NULL) {
         free(input_pass);
         return ERROR_FILE;

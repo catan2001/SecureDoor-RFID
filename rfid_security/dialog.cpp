@@ -46,6 +46,8 @@ Dialog::Dialog(QWidget *parent)
                                    "color : #A9A9A9;"
                                    "min-width : 10em;}");
 
+    if(mkdir("../config", 0777) < 0)
+        qDebug() << "error in mkdir\n";
 }
 
 Dialog::~Dialog()
