@@ -59,27 +59,21 @@ Dialog::~Dialog()
 void Dialog::on_acceptLoginPushButton_clicked()
 {
     const QString login_password = ui->passwordLineEdit->text();
-    const QString password = "admin";
-    //char login_password_str[] = login_password.toStdString();
     qDebug() << login_password << "\n";
     if(authenticate(login_password.toStdString().data()) == SUCCESS_PASS) {
         ui->passwordLineEdit->clear();
         qDebug() << "success\n";
-        this->hide();
+        this->close();
         mainWin = new MainWindow(this);
         mainWin->showMaximized();
         mainWin->setStyleSheet("MainWindow "
                                "{border: 2px solid #111111; "
                                "background-color : #222222; "
                                "padding: 2px }");
-
     }
     else
         qDebug() << "fail!\n";
 }
-
-
-
 
 void Dialog::on_cancelLoginPushButton_clicked()
 {

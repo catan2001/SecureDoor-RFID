@@ -3,8 +3,17 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QMenu>
+#include <QMenuBar>
 #include <QListWidget>
-#include "add_new_dialog.h"
+#include <QLineEdit>
+#include <QWidgetAction>
+#include <QAction>
+#include <QStringList>
+#include <QDebug>
+#include <add_new_dialog.h>
+#include <settingsdialog.h>
+#include <searchdialog.h>
 #include "sys/stat.h"
 
 QT_BEGIN_NAMESPACE
@@ -30,14 +39,22 @@ private slots:
     //void on_pushButtonAdd_clicked();
     void dataUse(NewClientStruct &structure);
     void on_listWidgetOptions1_itemClicked(QListWidgetItem *item);
-    void on_pushButtonLoad_clicked();
+    void on_listWidgetSideBar2_itemClicked(QListWidgetItem *item);
     void on_pushButtonDbgHistory_clicked();
+    void on_pushButtonSaveData_clicked();
+    void on_pushButtonLoad_clicked();
 
 private:
     Ui::MainWindow *ui;
+
     Add_New_Dialog *NewClientDialog;
+    SettingsDialog *settingsDialog;
+    SearchDialog *searchDialog;
     hidden_t if_hidden = NOT_HIDDEN;
+    QAction *searchAction;
+    QLineEdit *searchWidget;
     void readXmlData(char *path);
+    void writeXmlData(char *path);
 };
 
 #endif // MAINWINDOW_H

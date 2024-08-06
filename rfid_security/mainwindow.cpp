@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QDebug"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -181,48 +180,47 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->listWidget->item(1)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/AddIconOff.png");
+    icon = QIcon("../icons/AddIconOn.png");
     if(!icon.isNull()){
         ui->listWidgetSideBar2->item(0)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/SearchIconOff.png");
+    icon = QIcon("../icons/SearchIconOn.png");
     if(!icon.isNull()){
         ui->listWidgetSideBar2->item(1)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/SettingsIconOff.png");
+    icon = QIcon("../icons/SettingsIconOn.png");
     if(!icon.isNull()){
         ui->listWidgetSideBar2->item(2)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/AddClientOff.png");
+    icon = QIcon("../icons/AddClientOn.png");
     if(!icon.isNull()){
         ui->listWidgetOptions1->item(0)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/GarbageOff.png");
+    icon = QIcon("../icons/GarbageOn.png");
     if(!icon.isNull()){
         ui->listWidgetOptions1->item(1)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/RFIDOff.png");
+    icon = QIcon("../icons/RFIDOn.png");
     if(!icon.isNull()){
         ui->listWidgetOptions1->item(2)->setIcon(icon);
     }
 
-    icon = QIcon("../icons/ShowHideOff.png");
+    icon = QIcon("../icons/ShowHideOn.png");
     if(!icon.isNull()){
         ui->listWidgetOptions1->item(3)->setIcon(icon);
     }
 
     ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
     ui->stackedWidget->setCurrentWidget(ui->page_Clients);
-    //ui->listWidget->setCurrentRow(0);
-    //ui->tableWidget->setRowCount(1);
 
     char path[] = "../config/dataBase.xml";
     readXmlData(path);
+
 }
 
 MainWindow::~MainWindow()
@@ -244,15 +242,13 @@ void MainWindow::dataUse(NewClientStruct &structure) {
 
     auto model = ui->tableWidget->model();
 
-    if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
-
+    //if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+    ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 0), structure.firstName);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 1), structure.lastName);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 2), structure.emailAddress);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 3), structure.RFIDTag);
     model->setData(model->index(ui->tableWidget->rowCount()-1, 4), structure.imagePath);
-    ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
-
 }
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
@@ -304,21 +300,78 @@ void MainWindow::on_listWidgetOptions1_itemClicked(QListWidgetItem *item)
     }
 }
 
+void MainWindow::on_listWidgetSideBar2_itemClicked(QListWidgetItem *item)
+{
+    if(item == ui->listWidgetSideBar2->item(0)) {
+        NewClientDialog = new Add_New_Dialog(this);
+        NewClientDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                       "background: no;"
+                                       "background-color : #222222; "
+                                       "padding: 2px }");
+        NewClientDialog->show();
+        // connect NewClientDialog with MainWindow to get data
+        QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
+                         this, SLOT(dataUse(NewClientStruct &)));
+    }
+    if(item == ui->listWidgetSideBar2->item(1)) {
+
+        searchDialog = new SearchDialog(this);
+        searchDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                      "background: no;"
+                                      "background-color : #222222; "
+                                      "padding: 2px }");
+        searchDialog->show();
+    }
+    if(item == ui->listWidgetSideBar2->item(2)) {
+
+        settingsDialog = new SettingsDialog(this);
+        settingsDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                      "background: no;"
+                                      "background-color : #222222; "
+                                      "padding: 2px }");
+        settingsDialog->show();
+    }
+}
+
+// reads Table from the file
 void MainWindow::on_pushButtonLoad_clicked()
 {
-    QString DBdataPath = QFileDialog::getOpenFileName(this, "Open DataBase", "../");
+    QString DBdataPath = QFileDialog::getOpenFileName(this, "Open DataBase", "../config/", tr("XML files (*.xml);;Text files (*.txt)"));
+    if(DBdataPath == NULL)
+        return;
+    QByteArray byteDataPath = DBdataPath.toUtf8();
+    readXmlData(byteDataPath.data());
+}
+
+void MainWindow::on_pushButtonSaveData_clicked()
+{
+    QString DBdataPath = QFileDialog::getSaveFileName(this, "Save DataBase", "../config/config.xml", tr("XML files (*.xml);;Text files (*.txt)"));
+    if(DBdataPath == NULL)
+        return;
+    QByteArray byteDataPath = DBdataPath.toUtf8();
+    writeXmlData(byteDataPath.data());
 }
 
 void MainWindow::on_pushButtonDbgHistory_clicked()
 {
     ui->listWidgetHistory->insertItem(0, "Bla konj bla");
     ui->listWidgetHistory->insertItem(0, "kramk");
+
+    //TODO: resize as window gets resized
+    QPixmap pmap;
+    pmap.load("/home/catic/Documents/RFID_security/person2.png");
+    if(!pmap.isNull()){
+    pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
+    pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
+    ui->LabelReadImage->setPixmap(pmap);
+    }
 }
 
 // very simple function for reading data
 // TODO: if enough time make lexer for XML file.
 void MainWindow::readXmlData(char *path){
     FILE *fp;
+
     fp = fopen(path, "r");
     if(fp == NULL) return; // todo: ADD ERROR BOX JUMPS
     char firstName[50];
@@ -326,17 +379,50 @@ void MainWindow::readXmlData(char *path){
     char emailAddress[70];
     char RFIDTag[70];
     char imagePath[100];
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
     while(fscanf(fp, "<user><name> %s </name><lastname> %s </lastname><email> %s </email><rfid> %s </rfid><imgpath> %s </imgpath></user>\n", firstName, lastName, emailAddress, RFIDTag, imagePath) == 5)
     {
         auto model = ui->tableWidget->model();
-        if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
-
+        //if(ui->tableWidget->rowCount() <= 0) ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+        ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
         model->setData(model->index(ui->tableWidget->rowCount()-1, 0), firstName);
         model->setData(model->index(ui->tableWidget->rowCount()-1, 1), lastName);
         model->setData(model->index(ui->tableWidget->rowCount()-1, 2), emailAddress);
         model->setData(model->index(ui->tableWidget->rowCount()-1, 3), RFIDTag);
         model->setData(model->index(ui->tableWidget->rowCount()-1, 4), imagePath);
-        ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
     }
+    fclose(fp);
 }
+
+void MainWindow::writeXmlData(char *path){
+    FILE *fp;
+
+    fp = fopen(path, "w+");
+    if(fp == NULL) return; // todo: ADD ERROR BOX JUMPS
+    int numberRows = ui->tableWidget->rowCount();
+    qDebug() << numberRows;
+    for(int i = 0; i < numberRows; ++i) {
+        for(int j = 0; j < 5; ++j) {
+            if(ui->tableWidget->item(i, j)->text().isNull()) {break;
+            qDebug() << "usaooo\n";}
+            QTableWidgetItem *item = ui->tableWidget->item(i, j);
+            QString temp = item->text();
+            QByteArray byteTemp = temp.toUtf8();
+            qDebug() << "i = " << i << "\n";
+            if(j == 0)
+                fprintf(fp, "<user><name> %s </name>", byteTemp.data());
+            if(j == 1)
+                fprintf(fp, "<lastname> %s </lastname>", byteTemp.data());
+            if(j == 2)
+                fprintf(fp, "<email> %s </email>", byteTemp.data());
+            if(j == 3)
+                fprintf(fp, "<rfid> %s </rfid>", byteTemp.data());
+            if(j == 4)
+                fprintf(fp, "<imgpath> %s </imgpath></user>\n", byteTemp.data());
+        }
+    }
+    fclose(fp);
+}
+
 

@@ -123,7 +123,6 @@ void Add_New_Dialog::on_PushButton_LoadNewImage_clicked()
 {
     dataPath = QFileDialog::getOpenFileName(this, "Open Image", "../");
     ui->LineEdit_Path->insert(dataPath);
-    //pmap.load(dataPath);
 }
 
 void Add_New_Dialog::on_LineEdit_Path_textEdited(const QString &arg1)
@@ -154,9 +153,12 @@ void Add_New_Dialog::on_PushButton_Cancel_clicked()
 
 void Add_New_Dialog::on_ToolButtonInfoNewClient_clicked()
 {
-    QMessageBox msgBox;
-    msgBox.setText("Please Save an Image into Programs Folder");
-    msgBox.exec();
+    QMessageBox *msgBox = new QMessageBox(this);
+    //QMessageBox msgBox;
+    msgBox->setStyleSheet("QLabel {color: #eeeeee;}");
+    msgBox->setText("Please Save an Image into Programs Folder");
+    msgBox->exec();
+    delete msgBox;
 }
 
 void Add_New_Dialog::on_PushButton_Save_clicked()

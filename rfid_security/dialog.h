@@ -20,7 +20,6 @@ public:
 
 private slots:
     void on_acceptLoginPushButton_clicked();
-
     void on_cancelLoginPushButton_clicked();
 
 private:

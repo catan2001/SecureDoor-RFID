@@ -954,9 +954,29 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <widget class="QMenu" name="menuFind_Client">
+     <property name="tearOffEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Find Client</string>
+     </property>
+     <property name="icon">
+      <iconset theme="edit-find">
+       <normaloff>.</normaloff>.</iconset>
+     </property>
+     <property name="separatorsCollapsible">
+      <bool>false</bool>
+     </property>
+     <property name="toolTipsVisible">
+      <bool>false</bool>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="actionsearch"/>
+    </widget>
     <addaction name="actionAdd_New_Client"/>
     <addaction name="actionMonitor"/>
-    <addaction name="actionFind_Client"/>
+    <addaction name="menuFind_Client"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -997,53 +1017,101 @@
    </property>
   </action>
   <action name="actionContents">
+   <property name="icon">
+    <iconset theme="help-browser">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Contents</string>
    </property>
   </action>
   <action name="actionTechnical_Support">
+   <property name="icon">
+    <iconset theme="help-faq">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Technical Support</string>
    </property>
   </action>
   <action name="actionContents_2">
+   <property name="icon">
+    <iconset theme="dialog-warning">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Report Bug</string>
    </property>
   </action>
   <action name="actionFull_Screen">
+   <property name="icon">
+    <iconset theme="view-fullscreen">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Full Screen</string>
    </property>
   </action>
   <action name="actionMinimize">
+   <property name="icon">
+    <iconset theme="zoom-out">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Minimize</string>
    </property>
   </action>
-  <action name="actionFind_Client">
-   <property name="text">
-    <string>Find Client</string>
-   </property>
-  </action>
   <action name="actionMonitor">
+   <property name="icon">
+    <iconset theme="video-display">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Monitor</string>
    </property>
   </action>
   <action name="actionAdd_New_Client">
+   <property name="icon">
+    <iconset theme="list-add">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Add New Client</string>
    </property>
   </action>
   <action name="actionShow_Left_Sidebar">
+   <property name="icon">
+    <iconset theme="go-first">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Show Left Sidebar</string>
    </property>
   </action>
   <action name="actionShow_Right_Sidebar">
+   <property name="icon">
+    <iconset theme="go-last">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Show History Sidebar</string>
+   </property>
+  </action>
+  <action name="actionsearch">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>search</string>
+   </property>
+   <property name="iconText">
+    <string>search</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>

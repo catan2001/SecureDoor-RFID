@@ -14,6 +14,8 @@ SOURCES += \
     main.cpp \
     dialog.cpp \
     mainwindow.cpp \
+    searchdialog.cpp \
+    settingsdialog.cpp \
     sha256.cpp
 
 HEADERS += \
@@ -21,12 +23,16 @@ HEADERS += \
     authenticate.h \
     dialog.h \
     mainwindow.h \
+    searchdialog.h \
+    settingsdialog.h \
     sha256.h
 
 FORMS += \
     add_new_dialog.ui \
     dialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    searchdialog.ui \
+    settingsdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
