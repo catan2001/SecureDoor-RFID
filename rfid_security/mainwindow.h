@@ -38,6 +38,7 @@ private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
     //void on_pushButtonAdd_clicked();
     void dataUse(NewClientStruct &structure);
+    void commandUse(search_t &searchTable);
     void on_listWidgetOptions1_itemClicked(QListWidgetItem *item);
     void on_listWidgetSideBar2_itemClicked(QListWidgetItem *item);
     void on_pushButtonDbgHistory_clicked();

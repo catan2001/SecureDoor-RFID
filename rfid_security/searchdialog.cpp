@@ -1,6 +1,8 @@
 #include "searchdialog.h"
 #include "ui_searchdialog.h"
 
+search_t searchTable;
+
 SearchDialog::SearchDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SearchDialog)
@@ -82,5 +84,29 @@ SearchDialog::~SearchDialog()
 void SearchDialog::on_pushButtonCancel_clicked()
 {
     QWidget::close();
+}
+
+void SearchDialog::on_pushButtonSearch_clicked()
+{
+    searchTable.numRows = 0;
+    searchTable.currentItem = 0;
+    searchTable.foundItems.clear();
+    searchTable.cmd = SEARCH;
+    searchTable.firstName = ui->lineEditFirstName->text();
+    searchTable.lastName = ui->lineEditLastName->text();
+    searchTable.emailAddress = ui->lineEditEmail->text();
+    commandClicked(searchTable);
+}
+
+void SearchDialog::on_pushButtonNext_clicked()
+{
+    searchTable.cmd = NEXT;
+    commandClicked(searchTable);
+}
+
+void SearchDialog::on_pushButtonPrevious_clicked()
+{
+    searchTable.cmd = PREVIOUS;
+    commandClicked(searchTable);
 }
 

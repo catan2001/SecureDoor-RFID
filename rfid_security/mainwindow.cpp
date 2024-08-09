@@ -321,6 +321,8 @@ void MainWindow::on_listWidgetSideBar2_itemClicked(QListWidgetItem *item)
                                       "background-color : #222222; "
                                       "padding: 2px }");
         searchDialog->show();
+        QObject::connect(searchDialog, SIGNAL(commandClicked(search_t &)),
+                         this, SLOT(commandUse(search_t &)));
     }
     if(item == ui->listWidgetSideBar2->item(2)) {
 
@@ -331,6 +333,48 @@ void MainWindow::on_listWidgetSideBar2_itemClicked(QListWidgetItem *item)
                                       "padding: 2px }");
         settingsDialog->show();
     }
+}
+
+void MainWindow::commandUse(search_t &searchTable) {
+    ui->tableWidget->clearSelection();
+    if(searchTable.cmd == SEARCH){
+        unsigned int cnt = 0;
+        for(int i = 0; i < ui->tableWidget->rowCount(); ++i) {
+            // if any of conditions is true cnt++ else countinue to next iteration.
+            if(searchTable.firstName == ui->tableWidget->item(i, 0)->text() && searchTable.lastName == ui->tableWidget->item(i, 1)->text() && searchTable.emailAddress == ui->tableWidget->item(i, 2)->text());
+            else
+            if(searchTable.lastName == ui->tableWidget->item(i, 1)->text() && searchTable.emailAddress == ui->tableWidget->item(i, 2)->text() && searchTable.firstName.isEmpty());
+            else
+            if(searchTable.firstName == ui->tableWidget->item(i, 0)->text() && searchTable.emailAddress == ui->tableWidget->item(i, 2)->text() && searchTable.lastName.isEmpty());
+            else
+            if(searchTable.firstName == ui->tableWidget->item(i, 0)->text() && searchTable.lastName == ui->tableWidget->item(i, 1)->text() && searchTable.emailAddress.isEmpty());
+            else
+            if(searchTable.firstName == ui->tableWidget->item(i, 0)->text() && searchTable.lastName.isEmpty() && searchTable.emailAddress.isEmpty());
+            else
+            if(searchTable.lastName == ui->tableWidget->item(i, 1)->text() && searchTable.firstName.isEmpty() && searchTable.emailAddress.isEmpty());
+            else
+            if(searchTable.emailAddress == ui->tableWidget->item(i, 2)->text() && searchTable.firstName.isEmpty() && searchTable.lastName.isEmpty());
+            else
+                continue;
+            cnt++;
+            searchTable.foundItems.push_back(i);
+        }
+        searchTable.numRows = cnt;
+        if(cnt)
+            ui->tableWidget->selectRow(searchTable.foundItems[0]);
+    }
+    else
+    if(searchTable.cmd == NEXT && searchTable.numRows) {
+        if(searchTable.currentItem < searchTable.numRows - 1)
+            searchTable.currentItem++;
+    }
+    else
+    if(searchTable.cmd == PREVIOUS && searchTable.numRows) {
+        if(searchTable.currentItem > 0)
+            searchTable.currentItem--;
+    }
+    if(searchTable.numRows)
+        ui->tableWidget->selectRow(searchTable.foundItems[searchTable.currentItem]);
 }
 
 // reads Table from the file
