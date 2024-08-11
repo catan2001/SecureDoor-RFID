@@ -217,10 +217,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statusbar->showMessage("Welcome! SecureDoor greets you!");
     ui->stackedWidget->setCurrentWidget(ui->page_Clients);
+    ui->listWidget->item(0)->setSelected(true);
+    ui->listWidget->selectionModel()->select(ui->listWidget->currentIndex(), QItemSelectionModel::NoUpdate);
+//    ui->listWidget->selectionCommand(ui->listWidget->indexFromItem(ui->listWidget->item(0)), QEvent::None)l
+    ui->listWidget->item(0)->setSelected(true);
 
     char path[] = "../config/dataBase.xml";
     readXmlData(path);
 
+    //ui->actionAdd_New_Client->connect(this, this->on_listWidgetOptions1_itemClicked(ui->listWidgetOptions1->item(0)));
 }
 
 MainWindow::~MainWindow()
@@ -403,11 +408,15 @@ void MainWindow::on_pushButtonDbgHistory_clicked()
 
     //TODO: resize as window gets resized
     QPixmap pmap;
-    pmap.load("/home/catic/Documents/RFID_security/person2.png");
+    QPixmap pmapScaled;
+    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
     if(!pmap.isNull()){
-    pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
-    pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
-    ui->LabelReadImage->setPixmap(pmap);
+    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
+    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
+    pmapScaled = pmap.scaled(pmap.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->LabelReadImage->resize(pmap.width(), pmap.height());
+    ui->LabelReadImage->setPixmap(pmapScaled);
+    ui->LabelReadImage->setScaledContents(true);
     }
 }
 
@@ -469,4 +478,121 @@ void MainWindow::writeXmlData(char *path){
     fclose(fp);
 }
 
+
+
+/*
+ * MenuBar trigger functions...
+ */
+
+void MainWindow::on_actionFull_Screen_triggered()
+{
+    this->showFullScreen();
+}
+
+
+void MainWindow::on_actionNormal_triggered()
+{
+    this->showMaximized();
+}
+
+
+void MainWindow::on_actionMinimize_triggered()
+{
+    this->showMinimized();
+}
+
+
+void MainWindow::on_actionShow_Right_Sidebar_triggered()
+{
+    if(if_hidden == NOT_HIDDEN) {
+        ui->listWidgetHistory->hide();
+        if_hidden = HIDDEN;
+    }
+    else {
+        ui->listWidgetHistory->show();
+        if_hidden = NOT_HIDDEN;
+    }
+}
+
+
+void MainWindow::on_actionShow_Left_Sidebar_triggered()
+{
+        if(leftSideBarIfHidden == NOT_HIDDEN) {
+            ui->listWidgetSideBar2->hide();
+            leftSideBarIfHidden = HIDDEN;
+        }
+        else {
+            ui->listWidgetSideBar2->show();
+            leftSideBarIfHidden = NOT_HIDDEN;
+        }
+}
+
+
+void MainWindow::on_actionSearch_triggered()
+{
+    searchDialog = new SearchDialog(this);
+    searchDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                  "background: no;"
+                                  "background-color : #222222; "
+                                  "padding: 2px }");
+    searchDialog->show();
+    QObject::connect(searchDialog, SIGNAL(commandClicked(search_t &)),
+                     this, SLOT(commandUse(search_t &)));
+}
+
+
+void MainWindow::on_actionMonitor_triggered()
+{
+    ui->listWidget->item(1)->setSelected(true);
+    ui->stackedWidget->setCurrentWidget(ui->page_Monitor);
+}
+
+
+void MainWindow::on_actionAdd_New_Client_triggered()
+{
+    NewClientDialog = new Add_New_Dialog(this);
+    NewClientDialog->setStyleSheet("QDialog {border: 2px solid #111111; "
+                                   "background: no;"
+                                   "background-color : #222222; "
+                                   "padding: 2px }");
+    NewClientDialog->show();
+    // connect NewClientDialog with MainWindow to get data
+    QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
+                     this, SLOT(dataUse(NewClientStruct &)));
+}
+
+
+void MainWindow::on_actionGithub_source_triggered()
+{
+    QUrl url("https://github.com/catan2001/RFID_security");
+    QDesktopServices::openUrl(url);
+}
+
+
+void MainWindow::on_actionReadMe_triggered()
+{
+    QUrl url("https://github.com/catan2001/RFID_security/blob/main/README.md");
+    QDesktopServices::openUrl(url);
+}
+
+
+void MainWindow::on_actionDeveloper_triggered()
+{
+    QUrl url("https://catan2001.github.io/");
+    QDesktopServices::openUrl(url);
+}
+
+
+void MainWindow::on_actionLicense_triggered()
+{
+    QUrl url("https://github.com/catan2001/RFID_security/blob/main/LICENSE");
+    QDesktopServices::openUrl(url);
+}
+
+
+void MainWindow::on_actionContents_2_triggered()
+{
+    QUrl url("https://mail.google.com/mail/u/1/?ogbl#inbox?compose=DmwnWrRqjKxFxsPxBVStDdCvNWmFJgqSkSmgxdkjLsKkFQrvzMJzcGCFgWvwkWsbzcLBDSjJHdLQ");
+    QDesktopServices::openUrl(url);
+}
 
