@@ -134,12 +134,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->labelReadName->setStyleSheet("QLabel{color: #eeeeee;}");
     ui->labelLastName->setStyleSheet("QLabel{color: #eeeeee;}");
     ui->labelReadLastName->setStyleSheet("QLabel{color: #eeeeee;}");
-    ui->labelRFID->setStyleSheet("QLabel{color: #eeeeee;}");
-    ui->labelReadRFID->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelTime->setStyleSheet("QLabel{color: #eeeeee;}");
+    ui->labelReadTime->setStyleSheet("QLabel{color: #eeeeee;}");
 
     ui->LabelReadImage->setStyleSheet("QLabel{"
                                       "border : 2px solid #111111;"
                                       "padding: 6px;"
+                                      "background-color: #212121;"
                                       "}");
 
     ui->pushButtonLoad->setStyleSheet("QPushButton"
@@ -225,6 +226,11 @@ MainWindow::MainWindow(QWidget *parent) :
     char path[] = "../config/dataBase.xml";
     readXmlData(path);
 
+
+    QTimer::singleShot(0, this, SLOT(handleResize()));
+
+    this->showMaximized();
+
     //ui->actionAdd_New_Client->connect(this, this->on_listWidgetOptions1_itemClicked(ui->listWidgetOptions1->item(0)));
 }
 
@@ -235,6 +241,21 @@ MainWindow::~MainWindow()
 
 void startUp() {
 
+}
+
+void MainWindow::handleResize(void) {
+    QResizeEvent event(ui->LabelReadImage->size(), ui->LabelReadImage->size());
+    resizeEvent(&event);
+    QPixmap pmap;
+    pmap.load("../person2.png");
+    if (!pmap.isNull()) {
+        // Scale the pixmap to fit within the label while keeping the aspect ratio
+        pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        // Set the pixmap to the label
+        ui->LabelReadImage->setPixmap(pmap);
+        ui->LabelReadImage->setAlignment(Qt::AlignCenter);
+    }
 }
 
 void MainWindow::dataUse(NewClientStruct &structure) {
@@ -407,17 +428,18 @@ void MainWindow::on_pushButtonDbgHistory_clicked()
     ui->listWidgetHistory->insertItem(0, "kramk");
 
     //TODO: resize as window gets resized
-    QPixmap pmap;
-    QPixmap pmapScaled;
-    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
-    if(!pmap.isNull()){
-    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
-    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
-    pmapScaled = pmap.scaled(pmap.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->LabelReadImage->resize(pmap.width(), pmap.height());
-    ui->LabelReadImage->setPixmap(pmapScaled);
-    ui->LabelReadImage->setScaledContents(true);
-    }
+//    QPixmap pmap;
+//    QPixmap pmapScaled;
+//    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
+//    if(!pmap.isNull()){
+//    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
+//    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
+//    pmap = pmap.scaled(pmap.size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+
+//    ui->LabelReadImage->resize(pmap.width(), pmap.height());
+//    ui->LabelReadImage->setPixmap(pmap);
+//    ui->LabelReadImage->setScaledContents(false);
+//    }
 }
 
 // very simple function for reading data
@@ -596,3 +618,18 @@ void MainWindow::on_actionContents_2_triggered()
     QDesktopServices::openUrl(url);
 }
 
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    // TODO: change picture to the one needed
+    QPixmap pmap;
+    pmap.load("../person2.png");
+    if (!pmap.isNull()) {
+        // Scale the pixmap to fit within the label while keeping the aspect ratio
+        pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        // Set the pixmap to the label
+        ui->LabelReadImage->setPixmap(pmap);
+        ui->LabelReadImage->setAlignment(Qt::AlignCenter);
+    }
+
+    QWidget::resizeEvent(event); // Call the base class implementation
+}

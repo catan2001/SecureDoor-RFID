@@ -12,6 +12,8 @@
 #include <QAction>
 #include <QStringList>
 #include <QDebug>
+#include <QTimer>
+#include <QResizeEvent>
 #include <add_new_dialog.h>
 #include <settingsdialog.h>
 #include <searchdialog.h>
@@ -45,32 +47,21 @@ private slots:
     void on_pushButtonDbgHistory_clicked();
     void on_pushButtonSaveData_clicked();
     void on_pushButtonLoad_clicked();
-
     void on_actionFull_Screen_triggered();
-
     void on_actionNormal_triggered();
-
     void on_actionMinimize_triggered();
-
     void on_actionShow_Right_Sidebar_triggered();
-
     void on_actionShow_Left_Sidebar_triggered();
-
     void on_actionSearch_triggered();
-
     void on_actionMonitor_triggered();
-
     void on_actionAdd_New_Client_triggered();
-
     void on_actionGithub_source_triggered();
-
     void on_actionReadMe_triggered();
-
     void on_actionDeveloper_triggered();
-
     void on_actionLicense_triggered();
-
     void on_actionContents_2_triggered();
+    void handleResize(void);
+
 
 private:
     Ui::MainWindow *ui;
@@ -84,6 +75,7 @@ private:
     QLineEdit *searchWidget;
     void readXmlData(char *path);
     void writeXmlData(char *path);
+    void resizeEvent(QResizeEvent *event) override; // overrides resize event to fit picture
 };
 
 #endif // MAINWINDOW_H
