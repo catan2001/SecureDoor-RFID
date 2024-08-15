@@ -1,4 +1,4 @@
-#include <include/dialog.h>
+#include "include/dialog.h"
 #include <QApplication>
 
 using namespace std;
