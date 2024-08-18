@@ -70,6 +70,7 @@ void Dialog::on_acceptLoginPushButton_clicked()
                                "{border: 2px solid #111111; "
                                "background-color : #222222; "
                                "padding: 2px }");
+
     }
     else
         qDebug() << "fail!\n";

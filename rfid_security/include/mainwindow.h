@@ -17,6 +17,7 @@
 #include <include/add_new_dialog.h>
 #include <include/settingsdialog.h>
 #include <include/searchdialog.h>
+#include <include/rfidreader.h>
 #include "sys/stat.h"
 
 QT_BEGIN_NAMESPACE
@@ -39,7 +40,6 @@ public:
 
 private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
-    //void on_pushButtonAdd_clicked();
     void dataUse(NewClientStruct &structure);
     void commandUse(search_t &searchTable);
     void on_listWidgetOptions1_itemClicked(QListWidgetItem *item);
@@ -61,11 +61,15 @@ private slots:
     void on_actionLicense_triggered();
     void on_actionContents_2_triggered();
     void handleResize(void);
+    void readRFIDtag(QString rfidtag);
 
 
 private:
     Ui::MainWindow *ui;
 
+    QString foundPersonImgPath;
+    QThread* thread;
+    RFIDReader* rfidreader;
     Add_New_Dialog *NewClientDialog;
     SettingsDialog *settingsDialog;
     SearchDialog *searchDialog;

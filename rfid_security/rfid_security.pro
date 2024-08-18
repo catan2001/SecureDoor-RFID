@@ -14,6 +14,7 @@ SOURCES += \
     src/dialog.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/rfidreader.cpp \
     src/searchdialog.cpp \
     src/settingsdialog.cpp \
     src/sha256.cpp
@@ -23,9 +24,10 @@ HEADERS += \
     include/authenticate.h \
     include/dialog.h \
     include/mainwindow.h \
+    include/rfidreader.h \
     include/searchdialog.h \
     include/settingsdialog.h \
-    include/sha256.h \
+    include/sha256.h
 
 FORMS += \
     forms/add_new_dialog.ui \

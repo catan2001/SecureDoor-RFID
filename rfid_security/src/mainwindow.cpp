@@ -226,12 +226,23 @@ MainWindow::MainWindow(QWidget *parent) :
     char path[] = "../config/dataBase.xml";
     readXmlData(path);
 
-
     QTimer::singleShot(0, this, SLOT(handleResize()));
 
-    this->showMaximized();
+    thread = new QThread();
+    rfidreader = new RFIDReader();
 
-    //ui->actionAdd_New_Client->connect(this, this->on_listWidgetOptions1_itemClicked(ui->listWidgetOptions1->item(0)));
+    rfidreader->moveToThread(thread);
+    //connect(rfidreader, &RFIDReader::error, &MainWindow::
+    )
+    connect(thread, &QThread::started, rfidreader, &RFIDReader::readingProcess);
+    connect(rfidreader, &RFIDReader::finished, thread, &QThread::quit);
+    connect(rfidreader, &RFIDReader::finished, rfidreader, &RFIDReader::deleteLater);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+
+    // connect RFIDReader's signal function sendRFIDtag to MainWindow's slot function readRFIDtag...
+    QObject::connect(rfidreader, SIGNAL(sendRFIDtag(QString)), this, SLOT(readRFIDtag(QString)));
+    thread->start();
+
 }
 
 MainWindow::~MainWindow()
@@ -245,6 +256,7 @@ void startUp() {
 
 void MainWindow::handleResize(void) {
     QResizeEvent event(ui->LabelReadImage->size(), ui->LabelReadImage->size());
+    qDebug()<< this->size() << "\n";
     resizeEvent(&event);
     QPixmap pmap;
     pmap.load("../person2.png");
@@ -254,6 +266,8 @@ void MainWindow::handleResize(void) {
 
         // Set the pixmap to the label
         ui->LabelReadImage->setPixmap(pmap);
+        qDebug() << ui->LabelReadImage->size() << "\n";
+
         ui->LabelReadImage->setAlignment(Qt::AlignCenter);
     }
 }
@@ -424,22 +438,26 @@ void MainWindow::on_pushButtonSaveData_clicked()
 
 void MainWindow::on_pushButtonDbgHistory_clicked()
 {
+
     ui->listWidgetHistory->insertItem(0, "Bla konj bla");
     ui->listWidgetHistory->insertItem(0, "kramk");
 
-    //TODO: resize as window gets resized
-//    QPixmap pmap;
-//    QPixmap pmapScaled;
-//    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
-//    if(!pmap.isNull()){
-//    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
-//    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
-//    pmap = pmap.scaled(pmap.size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    qDebug()<< this->size() << "\n";
 
-//    ui->LabelReadImage->resize(pmap.width(), pmap.height());
-//    ui->LabelReadImage->setPixmap(pmap);
-//    ui->LabelReadImage->setScaledContents(false);
-//    }
+    //TODO: resize as window gets resized
+    QPixmap pmap;
+    QPixmap pmapScaled;
+    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
+    if(!pmap.isNull()){
+    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
+    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
+    pmap = pmap.scaled(pmap.size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+
+    ui->LabelReadImage->resize(pmap.width(), pmap.height());
+    ui->LabelReadImage->setPixmap(pmap);
+    ui->LabelReadImage->setScaledContents(false);
+
+    }
 }
 
 // very simple function for reading data
@@ -499,8 +517,6 @@ void MainWindow::writeXmlData(char *path){
     }
     fclose(fp);
 }
-
-
 
 /*
  * MenuBar trigger functions...
@@ -621,7 +637,7 @@ void MainWindow::on_actionContents_2_triggered()
 void MainWindow::resizeEvent(QResizeEvent *event) {
     // TODO: change picture to the one needed
     QPixmap pmap;
-    pmap.load("../person2.png");
+    pmap.load(foundPersonImgPath);
     if (!pmap.isNull()) {
         // Scale the pixmap to fit within the label while keeping the aspect ratio
         pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -633,3 +649,24 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 
     QWidget::resizeEvent(event); // Call the base class implementation
 }
+
+
+void MainWindow::readRFIDtag(QString rfidtag) {
+    ui->listWidgetHistory->insertItem(0, "Bla konj bla");
+    foundPersonImgPath = "/home/catic/Documents/project/AdaBoost_DLib/HOG/test_template.jpeg";
+    qDebug() << rfidtag;
+    //TODO: resize as window gets resized
+    QPixmap pmap;
+    QPixmap pmapScaled;
+    pmap.load(foundPersonImgPath);
+    if(!pmap.isNull()){
+    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
+    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
+    pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    ui->LabelReadImage->resize(pmap.width(), pmap.height());
+    ui->LabelReadImage->setPixmap(pmap);
+    ui->LabelReadImage->setScaledContents(false);
+    }
+ }
+
