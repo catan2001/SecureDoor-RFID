@@ -157,7 +157,7 @@
           <property name="minimumSize">
            <size>
             <width>85</width>
-            <height>260</height>
+            <height>280</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -406,6 +406,7 @@
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -677,6 +678,7 @@
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -726,6 +728,7 @@
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -808,6 +811,7 @@
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -851,6 +855,7 @@
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -940,7 +945,7 @@
      <x>0</x>
      <y>0</y>
      <width>709</width>
-     <height>23</height>
+     <height>27</height>
     </rect>
    </property>
    <property name="defaultUp">

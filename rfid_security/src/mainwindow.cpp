@@ -232,8 +232,7 @@ MainWindow::MainWindow(QWidget *parent) :
     rfidreader = new RFIDReader();
 
     rfidreader->moveToThread(thread);
-    //connect(rfidreader, &RFIDReader::error, &MainWindow::
-    )
+    //connect(rfidreader, &RFIDReader::error, &MainWindow: )
     connect(thread, &QThread::started, rfidreader, &RFIDReader::readingProcess);
     connect(rfidreader, &RFIDReader::finished, thread, &QThread::quit);
     connect(rfidreader, &RFIDReader::finished, rfidreader, &RFIDReader::deleteLater);

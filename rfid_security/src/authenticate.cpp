@@ -1,7 +1,8 @@
 #include "include/authenticate.h"
 #include "include/sha256.h"
+#include <QDebug>
 
-int authenticate(char *input) {
+int authenticate(const char *input) {
     FILE *fp;
     FILE *fd;
     const char salt[] = "89ZhK$#!__)9mjjjk"; // CHANGE FOR SECURITY REASONS!
@@ -13,6 +14,9 @@ int authenticate(char *input) {
     unsigned int input_pass_sha[8];
     strcpy(input_pass, input); //TODO: change strcpy to better function
 
+    if(mkdir("../config", 0777) < 0)
+        qDebug() << "error in mkdir\n";
+
     for(unsigned int i = 0; i < strlen(input_pass); ++i) {
         input_pass[i] = input_pass[i]/2 + salt[i%salt_len]; //salting
     }
@@ -20,13 +24,16 @@ int authenticate(char *input) {
     fp = fopen("../config/config", "r");
     if(fp == NULL) {
         fp = fopen("../config/config", "w"); // if the file does not exist, create it and write password: admin
+
         if(fp == NULL) {
             free(input_pass);
             return ERROR_FILE;
         };
+
         for(unsigned int i = 0; i < strlen(default_pass); ++i) {
             default_pass[i] = default_pass[i]/2 + salt[i%salt_len]; //salting
         }
+
         if(sha_256(default_pass, default_sha) != 0) {
             free(input_pass);
             return ERROR_SHA;

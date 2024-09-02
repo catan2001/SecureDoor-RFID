@@ -30,7 +30,7 @@ int sha_256(char *str, unsigned int *output_string){
     unsigned long long int len = strlen(str); // length of string
     unsigned long long int bit_len = len*8;
 
-    if(strlen(str) > 55 || (sizeof(output_string)) < 8) {
+    if(strlen(str) > 55 || (sizeof(output_string)) > 8) {
         return -1;
     }
     //unsigned int num_blocks = len/55 + 1; // 55 characters = 64(8*64 = 512) - 8(8*8 = 64 bits for length) - 1(1 bit for '1' to append)
