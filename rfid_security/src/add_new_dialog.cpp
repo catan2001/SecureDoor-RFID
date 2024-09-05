@@ -112,6 +112,7 @@ Add_New_Dialog::Add_New_Dialog(QWidget *parent) :
                                        "padding: 6px;}"
                                        "QProgressBar::Chunk"
                                        "{background-color : #66ff00;}");
+
 }
 
 Add_New_Dialog::~Add_New_Dialog()
@@ -137,9 +138,7 @@ void Add_New_Dialog::on_LineEdit_Path_textEdited(const QString &arg1)
 
 void Add_New_Dialog::on_PushButton_ScanTag_clicked()
 {
-    //todo: implement scan function here
     ui->ProgressBarTag->setValue(25);
-    QString rfidTag = "3afdc96b35e60a6c3d98fc06ca8647ad5a106c862503cb64f982d260928c7285"; // admin password just for debug
     ui->ProgressBarTag->setValue(75);
     ui->labelEnterRFID->setText(rfidTag);
     ui->ProgressBarTag->setValue(100);
@@ -197,5 +196,10 @@ void Add_New_Dialog::on_PushButton_Save_clicked()
 
     dataChanged(structure); // signal changes to MainWindow
     QWidget::close(); // close current Dialog
+}
+
+void Add_New_Dialog::readRFIDtag(QString rfidtag) {
+    rfidTag = rfidtag;
+    qDebug() << "test";
 }
 

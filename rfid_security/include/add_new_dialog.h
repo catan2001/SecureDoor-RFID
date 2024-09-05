@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "rfidreader.h"
 
 typedef struct{
     QString firstName;
@@ -34,10 +35,12 @@ private slots:
     void on_PushButton_Cancel_clicked();
     void on_ToolButtonInfoNewClient_clicked();
     void on_PushButton_Save_clicked();
+    void readRFIDtag(QString);
 signals:
     void dataChanged(NewClientStruct &structure);
 
 private:
+    QString rfidTag;
     QPixmap pmap;
     QString dataPath;
     Ui::Add_New_Dialog *ui;

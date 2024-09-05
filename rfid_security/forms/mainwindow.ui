@@ -358,7 +358,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
           <property name="spacing">
            <number>12</number>
           </property>
@@ -366,13 +366,13 @@
            <widget class="QLabel" name="labelSettings">
             <property name="minimumSize">
              <size>
-              <width>80</width>
+              <width>115</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>115</width>
               <height>16777215</height>
              </size>
             </property>
@@ -393,13 +393,13 @@
            <widget class="QListWidget" name="listWidgetOptions1">
             <property name="minimumSize">
              <size>
-              <width>105</width>
+              <width>115</width>
               <height>400</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>105</width>
+              <width>115</width>
               <height>400</height>
              </size>
             </property>
@@ -495,13 +495,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonDbgHistory">
-            <property name="text">
-             <string>DebugHistory</string>
-            </property>
-           </widget>
           </item>
           <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonSaveData">
@@ -694,8 +687,14 @@
              <widget class="QLabel" name="labelReadName">
               <property name="minimumSize">
                <size>
-                <width>221</width>
+                <width>300</width>
                 <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -715,13 +714,13 @@
              <widget class="QLabel" name="labelLastName">
               <property name="minimumSize">
                <size>
-                <width>105</width>
+                <width>125</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>125</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -744,8 +743,14 @@
              <widget class="QLabel" name="labelReadLastName">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>300</width>
                 <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -824,8 +829,14 @@
              <widget class="QLabel" name="labelReadEmail">
               <property name="minimumSize">
                <size>
-                <width>221</width>
+                <width>300</width>
                 <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -842,13 +853,13 @@
              <widget class="QLabel" name="labelTime">
               <property name="minimumSize">
                <size>
-                <width>105</width>
+                <width>125</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>100</width>
+                <width>125</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -871,8 +882,14 @@
              <widget class="QLabel" name="labelReadTime">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>300</width>
                 <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">

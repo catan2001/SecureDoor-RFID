@@ -310,6 +310,7 @@ void MainWindow::on_listWidgetOptions1_itemClicked(QListWidgetItem *item)
         // connect NewClientDialog with MainWindow to get data
         QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
                          this, SLOT(dataUse(NewClientStruct &)));
+        QObject::connect(rfidreader, SIGNAL(sendRFIDtag(QString)), NewClientDialog, SLOT(readRFIDtag(QString)));
     }
 
     // REMOVE ROW FROM TABLE
@@ -323,7 +324,7 @@ void MainWindow::on_listWidgetOptions1_itemClicked(QListWidgetItem *item)
     if(item == ui->listWidgetOptions1->item(2)) {
         //just for debug purpose;
         auto model = ui->tableWidget->model();
-        model->setData(model->index(ui->tableWidget->currentRow(), 3), "12847987094658723450823576213908");
+        model->setData(model->index(ui->tableWidget->currentRow(), 3), readRFIDTag);
     }
 
     // hides listWidgetHistory
@@ -351,6 +352,7 @@ void MainWindow::on_listWidgetSideBar2_itemClicked(QListWidgetItem *item)
         // connect NewClientDialog with MainWindow to get data
         QObject::connect(NewClientDialog, SIGNAL(dataChanged(NewClientStruct &)),
                          this, SLOT(dataUse(NewClientStruct &)));
+        QObject::connect(rfidreader, SIGNAL(sendRFIDtag(QString)), NewClientDialog, SLOT(readRFIDtag(QString)));
     }
     if(item == ui->listWidgetSideBar2->item(1)) {
 
@@ -435,6 +437,8 @@ void MainWindow::on_pushButtonSaveData_clicked()
     writeXmlData(byteDataPath.data());
 }
 
+// IF necessary uncomment
+/*
 void MainWindow::on_pushButtonDbgHistory_clicked()
 {
 
@@ -458,6 +462,8 @@ void MainWindow::on_pushButtonDbgHistory_clicked()
 
     }
 }
+*/
+
 
 // very simple function for reading data
 // TODO: if enough time make lexer for XML file.
@@ -651,21 +657,45 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 
 
 void MainWindow::readRFIDtag(QString rfidtag) {
-    ui->listWidgetHistory->insertItem(0, "Bla konj bla");
-    foundPersonImgPath = "/home/catic/Documents/project/AdaBoost_DLib/HOG/test_template.jpeg";
-    qDebug() << rfidtag;
-    //TODO: resize as window gets resized
+    int numberRows = ui->tableWidget->rowCount();
     QPixmap pmap;
     QPixmap pmapScaled;
-    pmap.load(foundPersonImgPath);
-    if(!pmap.isNull()){
-    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
-    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
-    pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QString personEntered;
+    QString foundPersonImgPath;
 
-    ui->LabelReadImage->resize(pmap.width(), pmap.height());
-    ui->LabelReadImage->setPixmap(pmap);
-    ui->LabelReadImage->setScaledContents(false);
+    std::time_t result = std::time(nullptr);
+
+    readRFIDTag = rfidtag;
+
+    qDebug() << numberRows;
+    for(int i = 0; i < numberRows; ++i) {
+        QTableWidgetItem *item = ui->tableWidget->item(i, 3);
+
+        qDebug() << rfidtag;
+        //TODO: resize as window gets resized
+
+        if(rfidtag == item->text()) {
+
+            personEntered = ui->tableWidget->item(i, 0)->text() + " " + ui->tableWidget->item(i, 1)->text();
+            foundPersonImgPath = ui->tableWidget->item(i, 4)->text();
+
+            ui->listWidgetHistory->insertItem(0, personEntered);
+            ui->labelReadEmail->setText(ui->tableWidget->item(i, 2)->text());
+            ui->labelReadLastName->setText(ui->tableWidget->item(i, 1)->text());
+            ui->labelReadName->setText(ui->tableWidget->item(i, 0)->text());
+            ui->labelReadTime->setText(QString::fromUtf8(asctime(std::localtime(&result))));
+
+            pmap.load(foundPersonImgPath);
+            if(!pmap.isNull()){
+            pmap = pmap.scaled(ui->LabelReadImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+            ui->LabelReadImage->resize(pmap.width(), pmap.height());
+            ui->LabelReadImage->setPixmap(pmap);
+            ui->LabelReadImage->setScaledContents(false);
+            }
+            return;
+        }
     }
+    ui->listWidgetHistory->insertItem(0, "Warning, false access!");
  }
 

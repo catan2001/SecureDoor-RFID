@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <ctime>
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QMenu>
@@ -44,7 +45,7 @@ private slots:
     void commandUse(search_t &searchTable);
     void on_listWidgetOptions1_itemClicked(QListWidgetItem *item);
     void on_listWidgetSideBar2_itemClicked(QListWidgetItem *item);
-    void on_pushButtonDbgHistory_clicked();
+    //void on_pushButtonDbgHistory_clicked();
     void on_pushButtonSaveData_clicked();
     void on_pushButtonLoad_clicked();
     void on_actionFull_Screen_triggered();
@@ -77,6 +78,7 @@ private:
     hidden_t leftSideBarIfHidden = NOT_HIDDEN;
     QAction *searchAction;
     QLineEdit *searchWidget;
+    QString readRFIDTag;
     void readXmlData(char *path);
     void writeXmlData(char *path);
     void resizeEvent(QResizeEvent *event) override; // overrides resize event to fit picture
