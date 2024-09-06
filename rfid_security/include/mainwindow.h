@@ -65,6 +65,8 @@ private slots:
     void readRFIDtag(QString rfidtag);
 
 
+    void on_actionContents_triggered();
+
 private:
     Ui::MainWindow *ui;
 

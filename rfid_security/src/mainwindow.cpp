@@ -699,3 +699,10 @@ void MainWindow::readRFIDtag(QString rfidtag) {
     ui->listWidgetHistory->insertItem(0, "Warning, false access!");
  }
 
+
+void MainWindow::on_actionContents_triggered()
+{
+    QUrl url("https://github.com/catan2001/RFIDSecurity/tree/main/rfid_security");
+    QDesktopServices::openUrl(url);
+}
+
