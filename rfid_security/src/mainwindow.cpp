@@ -616,6 +616,13 @@ void MainWindow::on_actionContents_2_triggered()
     QDesktopServices::openUrl(url);
 }
 
+void MainWindow::on_actionContents_triggered()
+{
+    QUrl url("https://github.com/catan2001/RFIDSecurity/blob/main/CONTENTS.md");
+    QDesktopServices::openUrl(url);
+}
+
+
 void MainWindow::resizeEvent(QResizeEvent *event) {
     // TODO: change picture to the one needed
     QPixmap pmap;
@@ -673,11 +680,3 @@ void MainWindow::readRFIDtag(QString rfidtag) {
     }
     ui->listWidgetHistory->insertItem(0, "Warning, false access!");
  }
-
-
-void MainWindow::on_actionContents_triggered()
-{
-    QUrl url("https://github.com/catan2001/RFIDSecurity/tree/main/rfid_security");
-    QDesktopServices::openUrl(url);
-}
-
