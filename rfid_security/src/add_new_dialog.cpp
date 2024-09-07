@@ -1,3 +1,26 @@
+/*MIT License
+
+Copyright (c) 2024 catan2001
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "include/add_new_dialog.h"
 #include "ui_add_new_dialog.h"
 
@@ -11,8 +34,6 @@ Add_New_Dialog::Add_New_Dialog(QWidget *parent) :
     ui->Label_Picture->setPixmap(pmap);
     ui->Label_Picture->setAlignment(Qt::AlignCenter);
     ui->Label_Picture->setStyleSheet("QLabel"
-//                                     "{background: url(../person2.png);"
-//                                     "background-repeat: no-repeat;"
                                      "{background-position: center;}");
 
     ui->LineEdit_Path->setStyleSheet("QLineEdit"
@@ -85,7 +106,6 @@ Add_New_Dialog::Add_New_Dialog(QWidget *parent) :
 
     ui->PushButton_Cancel->setStyleSheet("QPushButton "
                                          "{border : 2px solid #111111;"
-                                         //"border-radius: 10px;"
                                          "background-color : #3f3f3f;"
                                          "padding: 6px;"
                                          "min-width: 3em;"
@@ -96,7 +116,6 @@ Add_New_Dialog::Add_New_Dialog(QWidget *parent) :
 
     ui->ToolButtonInfoNewClient->setStyleSheet("QToolButton"
                                                "{border : 2px solid #111111;"
-                                               //"border-radius: 10px;"
                                                "background-color : #3f3f3f;"
                                                "padding: 6px;"
                                                "min-width: 3em;"
@@ -108,7 +127,6 @@ Add_New_Dialog::Add_New_Dialog(QWidget *parent) :
     ui->ProgressBarTag->setStyleSheet("QProgressBar"
                                        "{border : 2px solid #111111;"
                                        "background-color : #3f3f3f;"
-                                       //"color: #66ff00;"
                                        "padding: 6px;}"
                                        "QProgressBar::Chunk"
                                        "{background-color : #66ff00;}");
@@ -146,14 +164,12 @@ void Add_New_Dialog::on_PushButton_ScanTag_clicked()
 
 void Add_New_Dialog::on_PushButton_Cancel_clicked()
 {
-    //TODO implement pop-up {yes/no}
     QWidget::close();
 }
 
 void Add_New_Dialog::on_ToolButtonInfoNewClient_clicked()
 {
     QMessageBox *msgBox = new QMessageBox(this);
-    //QMessageBox msgBox;
     msgBox->setStyleSheet("QLabel {color: #eeeeee;}");
     msgBox->setText("Please Save an Image into Programs Folder");
     msgBox->exec();
@@ -200,6 +216,5 @@ void Add_New_Dialog::on_PushButton_Save_clicked()
 
 void Add_New_Dialog::readRFIDtag(QString rfidtag) {
     rfidTag = rfidtag;
-    qDebug() << "test";
 }
 

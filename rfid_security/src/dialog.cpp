@@ -1,3 +1,26 @@
+/*MIT License
+
+Copyright (c) 2024 catan2001
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "include/dialog.h"
 #include "ui_dialog.h"
 #include "QDebug"
@@ -18,7 +41,6 @@ Dialog::Dialog(QWidget *parent)
 
     ui->cancelLoginPushButton->setStyleSheet("QPushButton "
                                              "{border : 2px solid #111111;"
-                                             //"border-radius: 10px;"
                                              "background-color : #3f3f3f;"
                                              "padding: 6px;"
                                              "min-width: 3em;"
@@ -59,10 +81,8 @@ Dialog::~Dialog()
 void Dialog::on_acceptLoginPushButton_clicked()
 {
     const QString login_password = ui->passwordLineEdit->text();
-    qDebug() << login_password << "\n";
     if(authenticate(login_password.toStdString().data()) == SUCCESS_PASS) {
         ui->passwordLineEdit->clear();
-        qDebug() << "success\n";
         this->close();
         mainWin = new MainWindow(this);
         mainWin->showMaximized();
@@ -79,7 +99,5 @@ void Dialog::on_acceptLoginPushButton_clicked()
 void Dialog::on_cancelLoginPushButton_clicked()
 {
     ui->passwordLineEdit->clear();
-    //this->destroy();
-    //exit(EXIT_SUCCESS);
 }
 

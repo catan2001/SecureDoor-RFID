@@ -1,3 +1,26 @@
+/*MIT License
+
+Copyright (c) 2024 catan2001
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "include/mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -46,8 +69,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                   "QListWidget::item"
                                   "{background-color: transparent;"
                                   "color: #C0C0C0;}"
-                                  //"border: 2px solid #C0C0C0;}"
-
 
                                   "QListWidget::item:hover"
                                   "{background-color: #4863A0;" //4863A0
@@ -220,7 +241,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentWidget(ui->page_Clients);
     ui->listWidget->item(0)->setSelected(true);
     ui->listWidget->selectionModel()->select(ui->listWidget->currentIndex(), QItemSelectionModel::NoUpdate);
-//    ui->listWidget->selectionCommand(ui->listWidget->indexFromItem(ui->listWidget->item(0)), QEvent::None)l
     ui->listWidget->item(0)->setSelected(true);
 
     char path[] = "../config/dataBase.xml";
@@ -232,7 +252,6 @@ MainWindow::MainWindow(QWidget *parent) :
     rfidreader = new RFIDReader();
 
     rfidreader->moveToThread(thread);
-    //connect(rfidreader, &RFIDReader::error, &MainWindow: )
     connect(thread, &QThread::started, rfidreader, &RFIDReader::readingProcess);
     connect(rfidreader, &RFIDReader::finished, thread, &QThread::quit);
     connect(rfidreader, &RFIDReader::finished, rfidreader, &RFIDReader::deleteLater);
@@ -249,13 +268,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void startUp() {
-
-}
-
 void MainWindow::handleResize(void) {
     QResizeEvent event(ui->LabelReadImage->size(), ui->LabelReadImage->size());
-    qDebug()<< this->size() << "\n";
     resizeEvent(&event);
     QPixmap pmap;
     pmap.load("../person2.png");
@@ -265,18 +279,12 @@ void MainWindow::handleResize(void) {
 
         // Set the pixmap to the label
         ui->LabelReadImage->setPixmap(pmap);
-        qDebug() << ui->LabelReadImage->size() << "\n";
 
         ui->LabelReadImage->setAlignment(Qt::AlignCenter);
     }
 }
 
 void MainWindow::dataUse(NewClientStruct &structure) {
-    qDebug() << structure.firstName << "\n";
-    qDebug() << structure.lastName << "\n";
-    qDebug() << structure.emailAddress << "\n";
-    qDebug() << structure.RFIDTag << "\n";
-    qDebug() << structure.imagePath << "\n";
     qDebug() << "Connected!\n";
 
     auto model = ui->tableWidget->model();
@@ -437,34 +445,6 @@ void MainWindow::on_pushButtonSaveData_clicked()
     writeXmlData(byteDataPath.data());
 }
 
-// IF necessary uncomment
-/*
-void MainWindow::on_pushButtonDbgHistory_clicked()
-{
-
-    ui->listWidgetHistory->insertItem(0, "Bla konj bla");
-    ui->listWidgetHistory->insertItem(0, "kramk");
-
-    qDebug()<< this->size() << "\n";
-
-    //TODO: resize as window gets resized
-    QPixmap pmap;
-    QPixmap pmapScaled;
-    pmap.load("/home/catic/Documents/project/AdaBoost_DLib/HOG/timothee.jpg");
-    if(!pmap.isNull()){
-    //pmap = pmap.scaledToHeight(ui->LabelReadImage->height());
-    //pmap = pmap.scaledToWidth(ui->LabelReadImage->width());
-    pmap = pmap.scaled(pmap.size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
-
-    ui->LabelReadImage->resize(pmap.width(), pmap.height());
-    ui->LabelReadImage->setPixmap(pmap);
-    ui->LabelReadImage->setScaledContents(false);
-
-    }
-}
-*/
-
-
 // very simple function for reading data
 // TODO: if enough time make lexer for XML file.
 void MainWindow::readXmlData(char *path){
@@ -499,15 +479,12 @@ void MainWindow::writeXmlData(char *path){
     fp = fopen(path, "w+");
     if(fp == NULL) return; // todo: ADD ERROR BOX JUMPS
     int numberRows = ui->tableWidget->rowCount();
-    qDebug() << numberRows;
     for(int i = 0; i < numberRows; ++i) {
         for(int j = 0; j < 5; ++j) {
-            if(ui->tableWidget->item(i, j)->text().isNull()) {break;
-            qDebug() << "usaooo\n";}
+            if(ui->tableWidget->item(i, j)->text().isNull()) break;
             QTableWidgetItem *item = ui->tableWidget->item(i, j);
             QString temp = item->text();
             QByteArray byteTemp = temp.toUtf8();
-            qDebug() << "i = " << i << "\n";
             if(j == 0)
                 fprintf(fp, "<user><name> %s </name>", byteTemp.data());
             if(j == 1)
@@ -667,11 +644,9 @@ void MainWindow::readRFIDtag(QString rfidtag) {
 
     readRFIDTag = rfidtag;
 
-    qDebug() << numberRows;
     for(int i = 0; i < numberRows; ++i) {
         QTableWidgetItem *item = ui->tableWidget->item(i, 3);
 
-        qDebug() << rfidtag;
         //TODO: resize as window gets resized
 
         if(rfidtag == item->text()) {
